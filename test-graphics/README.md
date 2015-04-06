@@ -2,9 +2,9 @@
 
 **test-graphics** is a simple X11-based application, which generates moving rectangles of random size, (x,y) coordinates, speed and direction in an X11 window. It is used to test goroutines in terms of performance, scalability and memory consumption.
 
-Each generated rectangle is handled via a `move_rec` routine, which sends periodically to the `renderer` routine the position at which to display the rectangle. Synchronization between `move_rec` and `renderer` routines is handled via:
+Each generated rectangle is handled via a `move_rec` routine, which sends periodically to the `renderer` routine the rectangle structure to display. Synchronization between `move_rec` and `renderer` routines is handled via:
 
- - a buffered channel, which is used by the `move_rec` routines to send new rectangle elements to the `renderer` routine
+ - a buffered channel, which is used by the `move_rec` routines to send pointers of rectangle elements to the `renderer` routine
  - a simple boolean channel, which is used by the `renderer` routine to inform to a given `move_rec` routine when the rendering of a rectangle element has completed
 
 The `xres` and `yres` constants can be adjusted to change the size of the X11 window.

@@ -41,7 +41,7 @@ type Graphic struct {
 
 const xres int = 2048
 const yres int = 1400
-const num_rectangles int = 10000
+const num_rectangles int = 1000
 
 func randInt(min int, max int) int {
 	return min + rand.Intn(max - min)
@@ -108,9 +108,9 @@ func renderer(g *Graphic, c chan *Rect) {
 		rectangles[0].Width = uint16(rec.width)
 		rectangles[0].Height = uint16(rec.height)
 
-		// if previous x and y coordinates are > 0
+		// if previous x and y coordinates are >= 0
 		// erase rectangle element at previous x and y coordinates
-		if (rec.prevx > 0 && rec.prevy > 0) {
+		if (rec.prevx >= 0 && rec.prevy >= 0) {
 			rectangles[0].X = int16(rec.prevx)
 			rectangles[0].Y = int16(rec.prevy)
 			g.c.PolyRectangle(g.win, g.bg, rectangles)
